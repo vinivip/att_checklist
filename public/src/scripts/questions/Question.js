@@ -29,8 +29,8 @@ class Question {
             alternativesDiv.className = 'form-check';
             const radio = document.createElement('input');
             radio.type = 'radio';
-            radio.name = `question_${this.infos.id}`; // Nome �nico para o grupo de radio buttons
-            radio.id = `${this.infos.id}_alt_${index}`;
+            radio.name = this.id; // Nome unico para o grupo de radio buttons
+            radio.id = `response_alt_${index}`;
             radio.value = alt;
             radio.className = 'form-check-input';
 
