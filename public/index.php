@@ -22,9 +22,16 @@
 
         <form action="/submit" method="POST">
       
-            <div id="question_1" class="form-group"></div>
-            <div id="question_2" class="form-group"></div>
-            <div id="question_3" class="form-group"></div>
+            <div id="Color_1" class="form-group"></div>
+            <div class="d-flex flex-column rounded form-floating">
+                <input type="text" class="form-control mb-2" placeholder="Codigo da Cor">
+                <input type="text" class="form-control mb-2" placeholder="Codigo da Cor">
+            </div>
+            <div id="Custom_1" class="form-group"></div>
+                <input type="text" class="form-control mb-2" placeholder="Numero a ser pulado">
+            <div id="Custom_2" class="form-group"></div>
+                <textarea  placeholder="Intervalos da numeração" class="form-control mb-2"></textarea>
+    
 
            
             <!-- Botão de Envio -->

@@ -1,0 +1,24 @@
+[
+    {
+        "id": "Custom_1",
+        "infos": {
+            "title": "O cliente quer que pule algum número?",
+            "desc": "",
+            "alternativas": [
+                "Não",
+                "Sim"
+            ]
+        }
+    },{
+        "id": "Custom_2",
+        "infos": {
+            "title": "Qual o tipo de numeração que o cliente deseja?",
+            "desc": "Como será feita a sequência de numeração?",
+            "alternativas": [
+                "Numeração Sequencial Unica(Ex: Do 1 em Diante.)",
+                "Numeração Sequencial em Intervalos(Ex: Modelo 1: 1-20; Modelo 2: 21-30; etc.)",
+                "Numeração Sequencial Multipla(Ex: Modelo 1: 1-20; modelo 2: 1-10; modelo 3: 1-15)"
+            ]
+        }
+    }
+]

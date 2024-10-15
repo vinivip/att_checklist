@@ -1,0 +1,14 @@
+[
+    {
+        "id": "Color_1",
+        "infos": {
+            "title": "Quais cores serão utilizadas?",
+            "desc": "Informe qual a referência de cor deverá ser levada em conta.",
+            "alternativas": [
+                "Paleta pré-definida pelo cliente",
+                "Paleta da loja, se aproximando da arte de referencia"
+            ]
+        }
+    }
+    
+]
