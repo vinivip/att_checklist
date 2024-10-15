@@ -7,6 +7,12 @@
     <title>Formulário de Atendimento - VIP Sports</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .form-check{
+            display: flex;
+            flex-direction: column;
+        }
+    </style>
 </head>
 
 <body >
@@ -15,20 +21,10 @@
         <h1 class="text-center mb-4">Formulário de Atendimento - VIP Sports</h1>
 
         <form action="/submit" method="POST">
-            <!-- 1. Natureza da Referência Visual -->
-            <div class="form-group">
-                <h4>1. Natureza da Referência Visual</h4>
-                <p>O design das referências deve ser seguido à risca?</p>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" id="design_sim" name="design_referencia" value="Sim">
-                    <label class="form-check-label" for="design_sim">Sim</label>
-                </div>
-                <div class="form-check">
-                    <input class="form-check-input" type="radio" id="design_nao" name="design_referencia" value="Não">
-                    <label class="form-check-label" for="design_nao">Não</label>
-                </div>
-                <textarea placeholder="Especificar as modificações permitidas:" id="design_nao_justify" class="form-control mt-2" name="modificacoes_permitidas" rows="3"></textarea>
-            </div>
+      
+            <div id="question_1" class="form-group"></div>
+            <div id="question_2" class="form-group"></div>
+            <div id="question_3" class="form-group"></div>
 
            
             <!-- Botão de Envio -->
