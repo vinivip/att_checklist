@@ -39,19 +39,21 @@
             <div id="justifyColor_1" class="justifyContainer">
                 <div id="Imput_Colors" class="d-flex flex-column rounded form-floating"></div>
             </div> -->
-            <div id="Custom_1" class="form-group"></div>
-            <div id="justifyCustom_1" class="justifyContainer">
-                <input type="text" class="form-control mb-2" placeholder="Numero a ser pulado">
-            </div>
+            <h1>Elementos e Posições</h1>
+            <div id="Position_1"></div>
+            
+            <section class="d-none">
+                <div id="Custom_1" class="form-group"></div>
+                <div id="justifyCustom_1" class="justifyContainer">
+                    <input type="text" class="form-control mb-2" placeholder="Numero a ser pulado">
+                </div>
 
-            <div id="Custom_2" class="form-group"></div>
-            <div id="justifyCustom_2" class="justifyContainer">
-                <textarea placeholder="Intervalos da numeração" class="form-control mb-2"></textarea>
-            </div>
+                <div id="Custom_2" class="form-group"></div>
+                <div id="justifyCustom_2" class="justifyContainer">
+                    <textarea placeholder="Intervalos da numeração" class="form-control mb-2"></textarea>
+                </div>
 
-            <div id="Position_1">
-
-            </div>
+            </section>
 
 
             <!-- Botão de Envio -->

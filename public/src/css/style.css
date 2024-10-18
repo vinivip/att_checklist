@@ -1,3 +1,8 @@
 .justifyContainer{
     display: none;
 }
+.selectedPosition{
+    background-color: orange;
+    color: white;
+
+}

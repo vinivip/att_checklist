@@ -12,16 +12,15 @@ class Main {
     main() {
         // Exemplo de uso
         const elementos = [
-            { id: 1, elemento: "Logotipo" },
-            { id: 2, elemento: "Desenho" },
-            { id: 3, elemento: "Numeração" }
+            { id: 0, elemento: "Logotipo" },
+            { id: 1, elemento: "Ilustração" },
+            { id: 2, elemento: "Numeração" }
         ];
 
         const posicoes = [
-            { id: 1, nome: "Superior Esquerda" },
-            { id: 2, nome: "Superior Direita" },
-            { id: 3, nome: "Inferior Esquerda" },
-            { id: 4, nome: "Inferior Direita" }
+            { id: 0, nome: "Peito Direito" },
+            { id: 1, nome: "Peito Centro" },
+            { id: 2, nome: "Peito Esquerdo" },
         ];
 
         const listaDinamica = new PositionDynamicList(elementos, posicoes);
