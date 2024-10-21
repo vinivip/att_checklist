@@ -1,30 +1,21 @@
 import Question from "./questions/Question.js"
-import DynamicInputFields from "./helpers/DynamicInputFields.js"
-import PositionDynamicList from "./helpers/PositionDynamicList.js"
+import ElementsList  from "./helpers/ElementsPositionList.js"
 class Main {
     async preload() {
-        // this.questionSectionRender('src/data/Color.json')
         this.questionSectionRender('src/data/Customization.json')
-        // new DynamicInputFields("Imput_Colors", "Insira o código da cor")
-
         this.main()
     }
     main() {
-        // Exemplo de uso
-        const elementos = [
-            { id: 0, elemento: "Logotipo" },
-            { id: 1, elemento: "Ilustração" },
-            { id: 2, elemento: "Numeração" }
-        ];
+        const elementsList = new ElementsList();
 
-        const posicoes = [
-            { id: 0, nome: "Peito Direito" },
-            { id: 1, nome: "Peito Centro" },
-            { id: 2, nome: "Peito Esquerdo" },
-        ];
-
-        const listaDinamica = new PositionDynamicList(elementos, posicoes);
-        document.getElementById("Position_1").appendChild(listaDinamica.lista);
+        // Adicionando elementos à lista (substitua pelos seus dados reais)
+        elementsList.createElement({ 
+          typeOfElement: "1", 
+          elementPosition: "0", 
+          elementDescription: "Exemplo 1" 
+        });
+        elementsList.createElement();
+        
     }
     async questionSectionRender(data) {
         let questionData = await fetch(data);

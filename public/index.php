@@ -33,32 +33,37 @@
     <div class="container mt-5">
         <h1 class="text-center mb-4">Formulário de Atendimento - VIP Sports</h1>
 
-        <form action="/submit" method="POST">
-            <!--       
+        <!--       
             <div id="Color_1" class="form-group"></div>
             <div id="justifyColor_1" class="justifyContainer">
                 <div id="Imput_Colors" class="d-flex flex-column rounded form-floating"></div>
             </div> -->
-            <h1>Elementos e Posições</h1>
-            <div id="Position_1"></div>
-            
-            <section class="d-none">
-                <div id="Custom_1" class="form-group"></div>
-                <div id="justifyCustom_1" class="justifyContainer">
-                    <input type="text" class="form-control mb-2" placeholder="Numero a ser pulado">
-                </div>
+        <h1>Elementos e Posições</h1>
+        <div id="Position_1">
+            <h1>
+                Elementos da peça
+            </h1>
+            <ul id="elementsListContainer">
+                
+            </ul>
+        </div>
 
-                <div id="Custom_2" class="form-group"></div>
-                <div id="justifyCustom_2" class="justifyContainer">
-                    <textarea placeholder="Intervalos da numeração" class="form-control mb-2"></textarea>
-                </div>
+        <section class="d-none">
+            <div id="Custom_1" class="form-group"></div>
+            <div id="justifyCustom_1" class="justifyContainer">
+                <input type="text" class="form-control mb-2" placeholder="Numero a ser pulado">
+            </div>
 
-            </section>
+            <div id="Custom_2" class="form-group"></div>
+            <div id="justifyCustom_2" class="justifyContainer">
+                <textarea placeholder="Intervalos da numeração" class="form-control mb-2"></textarea>
+            </div>
+
+        </section>
 
 
-            <!-- Botão de Envio -->
-            <button type="submit" class="btn btn-primary btn-block">Enviar Formulário</button>
-        </form>
+        <!-- Botão de Envio -->
+        <button type="submit" class="btn btn-primary btn-block">Enviar Formulário</button>
     </div>
 
     <!-- Bootstrap JS e dependências -->
