@@ -5,7 +5,7 @@ export default class Question {
         this.render();
         
     }
-
+   
     render() {
         const container = document.getElementById(this.id);
         if (!container) {
@@ -34,14 +34,17 @@ export default class Question {
             radio.value = alt;
             radio.className = 'form-check-input';
             if (this.infos.justificativas.includes(index)){
+            
                 radio.addEventListener('click',()=>{
                     const justifyContent = document.getElementById("justify"+this.id)
                     justifyContent.style.display = 'block'
+                    justifyContent.classList.add('required')
                 })
             }else{
                 radio.addEventListener('click',()=>{
                     const justifyContent = document.getElementById("justify"+this.id)
                     justifyContent.style.display = 'none'
+                    justifyContent.classList.remove('required')
                 })
             }
 
