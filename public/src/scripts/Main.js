@@ -1,6 +1,7 @@
 import Question from "./questions/Question.js"
 import ElementsList  from "./helpers/ElementsList.js"
 import ModalPositionOption from "./helpers/ModalPositionOption.js";
+import FormSection from "./questions/FormSection.js";
 
 class Main {
     constructor(){
@@ -14,55 +15,29 @@ class Main {
         document.querySelector("#addElementsButton").addEventListener("click",()=>{
             elementsList.createElement()
         })
-        this.formSectionRender('src/data/Customization.json')
-        document.querySelector("#submitButton").addEventListener("click",()=>this.submitHandler(elementsList.values))
+       
+        this.main(elementsList)
+    }
+    async main(elementsList) {
+        
+        let teste = await fetch("./src/data/Aditional.json")
+        teste = await teste.json()
 
-        this.main()
-    }
-    main() {
+        teste.forEach((section, code)=>{
+            new FormSection(section, code)
+        })
+        document.querySelector("#submitButton").addEventListener("click",()=>{
+            this.submitHandler(elementsList.values)
+        })
         
+    }
 
-    }
-    async formSectionRender(data) {
-        let questionData = await fetch(data);
-        questionData = await questionData.json()
-        for (let i = 0; i < questionData.length; i++) {
-            document.querySelector("#"+questionData[i].id).innerHTML= ""
-            new Question(questionData[i].id, questionData[i].infos)
-        }
-    }
-    getCheckedBoxes(divId) {
-        // Seleciona todos os checkboxes dentro da div
-        const checkboxes = document.querySelectorAll(`#numerationSection input[type="radio"]`);
-        
-        const checkedBoxes = [];
-        
-        // Itera sobre os checkboxes
-        for (let i = 0; i < checkboxes.length; i++) {
-          if (checkboxes[i].checked) {
-            const answer = {"name": checkboxes[i].name,"answer" : checkboxes[i].value}
-            const answerObs = document.querySelector("#obs"+checkboxes[i].name).value
-            if(document.querySelector("#justify"+checkboxes[i].name).classList.contains("required")){
-                if(answerObs){
-                    answer["obs"] = answerObs
-                }else{
-                    throw new Error("Preencha todos campos requeridos")
-                }
-            }
-            checkedBoxes.push(answer);
-          }
-        }
-        if(checkedBoxes.length< document.getElementsByClassName("form-group").length && document.getElementsByClassName("form-group").length){
-            throw new Error("Marque todos campos requeridos")
-        }
-        return checkedBoxes;
-    }
 
     submitHandler(elementsList){ 
        try{
         const retorno = {
             "elementos": elementsList,
-            "numeração": this.getCheckedBoxes(numerationSection)
+            
         }
         if(elementsList.length == 1 && Object.values(elementsList[0]).includes('-1')){
             throw new Error("Informe pelomenos 1 elemento!")
@@ -73,7 +48,6 @@ class Main {
             }
         });
 
-        console.log("retorno",retorno)
         Swal.fire({
             title: 'Sucesso!',
             text: 'Informações Validadas',
@@ -81,6 +55,7 @@ class Main {
             confirmButtonText: 'OK'
         })
        }catch(e){
+        // console.console.log(e)
         Swal.fire({
             title: 'Informação Inconsistente!',
             text: e.message,
@@ -88,6 +63,7 @@ class Main {
             confirmButtonText: 'CORRIGIR'
           })
        }
+       
     }
 
 
