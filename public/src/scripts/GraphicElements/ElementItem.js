@@ -1,18 +1,10 @@
-
+import Main from "../Main.js";
 export default class ElementItem {
   constructor(element, index, elementsList, elementsTypes) {
     this.element = element;
     this.index = index;
     this.elementsList = elementsList;
-    this.elementsTypes = [
-      { name: "Logotipo" }, 
-      { name: "Numeração" },
-      { name: "Nome" },
-      { name: "Ilustração" }, 
-      { name: "Patrocínio" }, 
-      { name: "Personalização Adicional" },
-      { name: "Barra" }, 
-      { name: "Listra" }, ]
+    this.elementsTypes = elementsTypes
     this.createItem();
   }
 
@@ -54,8 +46,9 @@ export default class ElementItem {
     obsContainer.classList.add("d-flex")
     obsContainer.classList.add("justify-content-between")
 
+    const positionPreloadedName = Main.productPositions[this.element.elementPosition]
     const positionModalButton = document.createElement("button")
-    positionModalButton.textContent = "Selecionar Posição"
+    positionModalButton.textContent = positionPreloadedName? positionPreloadedName.name.toUpperCase() : "Selecionar Posição"
     positionModalButton.classList.add("btn")
     positionModalButton.classList.add("ml-3")
     positionModalButton.classList.add("col-4")
@@ -64,7 +57,9 @@ export default class ElementItem {
     positionModalButton.setAttribute('data-toggle', 'modal')
     positionModalButton.setAttribute('data-target', '#exampleModal')
     positionModalButton.onclick = () => {
+      
       document.querySelectorAll(".positionOption").forEach(option => {
+        option.classList.remove("selected")  
         option.onclick = (e) => {
           const selected = document.querySelector("#" + e.target.closest('button').id)
           const button = document.querySelector("#positionButton_" + this.index)
@@ -72,16 +67,18 @@ export default class ElementItem {
           this.elementsList.alterPosition(this.index, selected.id.split("_")[1]);
         }
       })
+      const selectedPosition = document.querySelector("#position_"+this.element.elementPosition)
+      selectedPosition.classList.add("selected")  
     }
 
-  
+    const descriptionPreloadedValue = this.element.elementDescription
     const descriptionInput = document.createElement("input");
     descriptionInput.classList.add("form-control")
     descriptionInput.classList.add("col-6")
     descriptionInput.type = "text";
     descriptionInput.placeholder = "Descrição do elemento";
     // Define o valor do input com base no objeto
-    descriptionInput.value = this.element.elementDescription;
+    descriptionInput.value = descriptionPreloadedValue;
 
     const deleteButton = document.createElement("button");
     deleteButton.id = `deleteElement${this.index}`

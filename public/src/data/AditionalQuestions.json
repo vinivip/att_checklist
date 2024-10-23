@@ -11,11 +11,12 @@
                     "Não",
                     "Sim"
                 ],
-                "justificativas":[
+                "justificativas": [
                     1
                 ]
             }
-        },{
+        },
+        {
             "id": "Custom_2",
             "infos": {
                 "title": "Qual o tipo de numeração que o cliente deseja?",
@@ -26,9 +27,25 @@
                     "Numeração Sequencial em Intervalos(Ex: Modelo 1: 1-20; Modelo 2: 21-30; etc.)",
                     "Numeração Sequencial Multipla(Ex: Modelo 1: 1-20; modelo 2: 1-10; modelo 3: 1-15)"
                 ],
-                "justificativas":[
-                    1,2
+                "justificativas": [
+                    1,
+                    2
                 ]
+            }
+        }
+    ],
+    [
+        {
+            "id": "Name_3",
+            "infos": {
+                "title": "Os nomes vão usar acento?",
+                "desc": "",
+                "resume": "Acentuação",
+                "alternativas": [
+                    "Sim",
+                    "Não"
+                ],
+                "justificativas": []
             }
         }
     ]

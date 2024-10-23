@@ -1,59 +1,70 @@
-import Question from "./questions/Question.js"
-import ElementsList  from "./helpers/ElementsList.js"
-import ModalPositionOption from "./helpers/ModalPositionOption.js";
+import ElementsList  from "./GraphicElements/ElementsList.js"
+import ModalPositionOption from "./GraphicElements/ModalPositionOption.js";
 import FormSection from "./questions/FormSection.js";
 
-class Main {
+export default class Main {
+    static elementsTypes 
+    static aditionalQuestions 
+    static productPositions 
+    static AdditionalInfosForm
+    
     constructor(){
-        this.positions = [{name: "peito centro"}, {name: "peito direito"}, {name: "peito esquerdo"}]
-      
+        this.preload()
+    }
+    async fetchData(url){
+        let raw = await fetch(url)
+        return await raw.json()
     }
     async preload() {
-        new ModalPositionOption(this.positions)
+        Main.productPositions = await this.fetchData("./src/data/ProductPositions.json")
+        Main.aditionalQuestions = await this.fetchData("./src/data/AditionalQuestions.json")
+        Main.elementsTypes = await this.fetchData("./src/data/ElementsTypes.json")
+
+        this.main()
+    }
+    async main() {
+        Main.AdditionalInfosForm = []
+         Main.aditionalQuestions.forEach((section, code)=>{
+            Main.AdditionalInfosForm.push(new FormSection(section, code))
+        })
+        new ModalPositionOption(Main.productPositions)
+        const elementsList = new ElementsList(Main.elementsTypes);
         
-        const elementsList = new ElementsList(this.elementsTypes);
+        document.querySelector("#submitButton").addEventListener("click",()=>{
+            this.submitHandler(elementsList)
+        })
         document.querySelector("#addElementsButton").addEventListener("click",()=>{
             elementsList.createElement()
         })
-       
-        this.main(elementsList)
     }
-    async main(elementsList) {
-        
-        let teste = await fetch("./src/data/Aditional.json")
-        teste = await teste.json()
-
-        teste.forEach((section, code)=>{
-            new FormSection(section, code)
-        })
-        document.querySelector("#submitButton").addEventListener("click",()=>{
-            this.submitHandler(elementsList.values)
-        })
-        
-    }
-
+   
 
     submitHandler(elementsList){ 
        try{
-        const retorno = {
-            "elementos": elementsList,
-            
-        }
-        if(elementsList.length == 1 && Object.values(elementsList[0]).includes('-1')){
-            throw new Error("Informe pelomenos 1 elemento!")
-        }
-        elementsList.forEach(element => {
-            if(Object.values(element).includes('-1')){
-                throw new Error("Preencha todos os campos do elemento")
+        const elementos = elementsList.getAnswers()
+        const complements = []
+        elementsList.typesOfElements().forEach(element=>{
+            const section = Main.AdditionalInfosForm[parseInt(element)].getAnswers()
+            if(section.length !== 0 ){
+                 complements.push({
+                "elementType": element,
+                "infos": section
+            })
             }
-        });
-
+           
+        })
+        const retorno = {
+            "elementos": elementos,
+            "complementos": complements,
+        }
+        console.log(retorno)
         Swal.fire({
             title: 'Sucesso!',
             text: 'Informações Validadas',
             icon: 'success',
             confirmButtonText: 'OK'
         })
+
        }catch(e){
         // console.console.log(e)
         Swal.fire({
@@ -65,9 +76,6 @@ class Main {
        }
        
     }
-
-
 }
 
-const App = new Main()
-App.preload()
+const app = new Main() 

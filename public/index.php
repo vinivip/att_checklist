@@ -16,10 +16,15 @@
 
         }
 
+        textarea {
+            resize: none;
+        }
+
         .form-check {
             display: flex;
             flex-direction: column;
         }
+
 
         ul {
             list-style: none;
@@ -57,11 +62,6 @@
     <main class="container mt-5">
         <h1 class="text-center mb-4">Formulário de Atendimento - VIP Sports</h1>
         <hr>
-        <section id="ArtDescription" class="p-3">
-            <h2>Descrição de Arte</h2>
-            <textarea class="col-12" name="" id="" placeholder="Detalhes na criação da arte"></textarea>
-        </section>
-        <hr>
         <section id="ElementsContainer" class="p-3">
             <h2 class="d-flex align-items-center">
                 Elementos Graficos
@@ -71,9 +71,9 @@
                         ADICIONAR ELEMENTO
                     </button>
                 </div>
-               
+
             </h2>
-       
+
             <ul class="elementsList" id="elementsListContainer">
 
             </ul>
@@ -82,7 +82,7 @@
         <section id="AditionalInfos" class="p-3">
             <h2 class="d-flex align-items-center">
                 Informações adicionais
-            
+
             </h2>
 
         </section>
