@@ -23,13 +23,12 @@ export default class Main {
         this.main()
     }
     async main() {
-        Main.AdditionalInfosForm = []
-         Main.aditionalQuestions.forEach((section, code)=>{
-            Main.AdditionalInfosForm.push(new FormSection(section, code))
+        Main.AdditionalInfosForm = {}
+        Object.keys(Main.aditionalQuestions).forEach(key=>{
+            Main.AdditionalInfosForm[key] = new FormSection(Main.aditionalQuestions[key], key)
         })
         new ModalPositionOption(Main.productPositions)
         const elementsList = new ElementsList(Main.elementsTypes);
-        elementsList.loadData([{ typeOfElement: "0", elementPosition: "1", elementDescription: "" },{ typeOfElement: "1", elementPosition: "0", elementDescription: "" }])
     
         document.querySelector("#submitButton").addEventListener("click",()=>{
             this.submitHandler(elementsList)
@@ -43,22 +42,21 @@ export default class Main {
     submitHandler(elementsList){ 
        try{
         const elementos = elementsList.getAnswers()
-        const complements = []
+        const complements = {}
         elementsList.typesOfElements().forEach(element=>{
-            const section = Main.AdditionalInfosForm[parseInt(element)].getAnswers()
+            if(Main.AdditionalInfosForm[element]){
+                const section = Main.AdditionalInfosForm[element].getAnswers()
             if(section.length !== 0 ){
-                 complements.push({
-                "elementType": element,
-                "infos": section
-            })
+                 complements[element] = section
             }
+            }
+            
            
         })
         const retorno = {
             "elementos": elementos,
             "complementos": complements,
         }
-        console.log(retorno)
         Swal.fire({
             title: 'Sucesso!',
             text: 'Informações Validadas',
@@ -67,7 +65,6 @@ export default class Main {
         })
 
        }catch(e){
-        // console.console.log(e)
         Swal.fire({
             title: 'Informação Inconsistente!',
             text: e.message,

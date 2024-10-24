@@ -1,22 +1,23 @@
 import Question from "./Question.js";
 import Main from "../Main.js"
+
 export default class FormSection {
     constructor(questionsData, codigo) {
         this.questionsData = questionsData;
         this.codigo = codigo;
         this.id = `aditionalFormSection_${codigo}`;
 
-       if(questionsData.length>0){
-        this.render();
-       }
-
+        if (questionsData.length > 0) {
+            this.render();
+        }
+       
     }
 
-    render() {  
+    render() {
         const container = document.createElement('div');
         const containerContent = document.createElement('div');
         container.id = this.id;
-          // Titulo da Secção
+        // Titulo da Secção
         const containerTitle = document.createElement("header")
         const containerTitleText = document.createElement("h4")
         containerTitleText.textContent = Main.elementsTypes[this.codigo].name
@@ -31,13 +32,13 @@ export default class FormSection {
         containerTitle.classList.add("col-1")
 
 
-   
-        
+
+
         container.className = 'form-section';
-        if(this.questionsData.length>0){
+        if (this.questionsData.length > 0) {
             container.classList.add("card")
         }
-        container.style.flexDirection="row"
+        container.style.flexDirection = "row"
 
         document.querySelector("#AditionalInfos").appendChild(container);
         container.appendChild(containerTitle)
@@ -50,7 +51,7 @@ export default class FormSection {
             questionContainer.id = questionData.id
 
             // Cria a área de justificativa
-            
+
             const justifyArea = document.createElement('div');
             justifyArea.id = `justify${questionData.id}`;
             justifyArea.className = 'justify-area';
@@ -60,6 +61,7 @@ export default class FormSection {
             const textArea = document.createElement('textarea');
             textArea.id = `obs${questionData.id}`;
             textArea.placeholder = 'Justifique sua resposta aqui...';
+            textArea.classList.add("card", "col-12", "mt-2")
             justifyArea.appendChild(textArea);
 
 
@@ -73,41 +75,60 @@ export default class FormSection {
     }
 
     getAnswers() {
-        
         const answers = [];
         this.questionsData.forEach(questionData => {
-            
+
             const answer = {
                 question: questionData.id,
                 resume: questionData.infos.resume,
+                alternative: null,
                 response: null,
-         
+
             };
 
             // Obtem a resposta selecionada
             const selectedAnswer = document.querySelector(`input[name="${questionData.id}"]:checked`);
             if (selectedAnswer) {
                 answer.response = selectedAnswer.value;
-            }else{
+            } else {
                 throw new Error("Preencha todas as informações adicionais")
             }
 
             // Obtem a justificativa, se houver
             const justifyTextArea = document.getElementById(`obs${questionData.id}`);
-            
+
             const selectedAnswerIndex = questionData.infos.alternativas.indexOf(selectedAnswer.value)
+            answer.alternative = selectedAnswerIndex
             const justifyIsRequired = questionData.infos.justificativas.includes(selectedAnswerIndex)
             if (justifyIsRequired) {
-                if( justifyTextArea.value){
-                     answer.justify = justifyTextArea.value;
-                }else{
+                if (justifyTextArea.value) {
+                    answer.justify = justifyTextArea.value;
+                } else {
                     throw new Error("Preencha as Observações em branco")
                 }
-               
+
             }
 
             answers.push(answer);
         });
         return answers;
+    }
+    reply(answer){
+        answer.forEach(question=>{
+            const questionContainer = document.getElementById(question.question)
+            if(questionContainer){
+                const questionReply = questionContainer.querySelectorAll("#response_alt_"+question.alternative)
+                questionReply.forEach(reply=>{
+                    reply.setAttribute("checked", true)
+                    if(question.justify){
+                       const justify = document.querySelector("#justify"+question.question)
+                       justify.style.display = "block"
+                       justify.querySelector(".card").value = question.justify
+                    }
+                })
+            
+            }
+            
+        })
     }
 }
