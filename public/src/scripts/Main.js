@@ -29,7 +29,8 @@ export default class Main {
         })
         new ModalPositionOption(Main.productPositions)
         const elementsList = new ElementsList(Main.elementsTypes);
-        
+        elementsList.loadData([{ typeOfElement: "0", elementPosition: "1", elementDescription: "" },{ typeOfElement: "1", elementPosition: "0", elementDescription: "" }])
+    
         document.querySelector("#submitButton").addEventListener("click",()=>{
             this.submitHandler(elementsList)
         })
